@@ -94,7 +94,7 @@ public final class Validator {
         if (!Boolean.TRUE.equals(required) && null == target) {
             return this;
         }
-        notEmpty(target, targetName).notNull(item, "必要元素");
+        notEmpty(target, targetName);
         if (!target.contains(item)) {
             throw MUST_CONTAIN_ELEMENT.ex(targetName, item);
         }
@@ -109,7 +109,7 @@ public final class Validator {
         if (!Boolean.TRUE.equals(required) && null == target) {
             return this;
         }
-        notEmpty(target, targetName).notNull(item, "必要元素");
+        notEmpty(target, targetName);
         if (!InnerMethod.isArrayContainsItem(target, item)) {
             throw MUST_CONTAIN_ELEMENT.ex(targetName, item);
         }
@@ -124,7 +124,7 @@ public final class Validator {
         if (!Boolean.TRUE.equals(required) && null == target) {
             return this;
         }
-        notEmpty(target, targetName).notNull(item, "必要键");
+        notEmpty(target, targetName);
         if (!target.containsKey(item)) {
             throw MUST_CONTAIN_KEY.ex(targetName, item);
         }
@@ -154,7 +154,7 @@ public final class Validator {
         if (!Boolean.TRUE.equals(required) && null == target) {
             return this;
         }
-        notEmpty(target, targetName).notNull(item, "必要元素");
+        notEmpty(target, targetName);
         if (target.contains(item)) {
             throw MUST_NOT_CONTAIN_ELEMENT.ex(targetName, item);
         }
@@ -169,7 +169,7 @@ public final class Validator {
         if (!Boolean.TRUE.equals(required) && null == target) {
             return this;
         }
-        notEmpty(target, targetName).notNull(item, "必要元素");
+        notEmpty(target, targetName);
         if (InnerMethod.isArrayContainsItem(target, item)) {
             throw MUST_NOT_CONTAIN_ELEMENT.ex(targetName, item);
         }
@@ -184,7 +184,7 @@ public final class Validator {
         if (!Boolean.TRUE.equals(required) && null == target) {
             return this;
         }
-        notEmpty(target, targetName).notNull(item, "必要键");
+        notEmpty(target, targetName);
         if (target.containsKey(item)) {
             throw MUST_NOT_CONTAIN_KEY.ex(targetName, item);
         }

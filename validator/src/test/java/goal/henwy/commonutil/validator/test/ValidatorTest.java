@@ -37,6 +37,7 @@ class ValidatorTest {
 
         Assertions.assertThrows(RuntimeException.class, () -> validator.hasText(null, targetName));
         Assertions.assertThrows(RuntimeException.class, () -> validator.hasText("", targetName));
+        Assertions.assertThrows(RuntimeException.class, () -> validator.hasText("   ", targetName));
         Assertions.assertThrows(RuntimeException.class, () -> validator.hasText(new StringBuilder(), targetName));
         Assertions.assertEquals(validator, validator.hasText("1", targetName).hasText(new StringBuilder().append(1), targetName));
     }
@@ -51,7 +52,7 @@ class ValidatorTest {
 
         Assertions.assertEquals(validator, validator.contains((Collection<Object>) null, targetName, new Object(), false));
         Assertions.assertThrows(RuntimeException.class, () -> validator.contains((Collection<Object>) null, targetName, new Object()));
-        Assertions.assertThrows(RuntimeException.class, () -> validator.contains(Collections.EMPTY_LIST, targetName, "1"));
+        Assertions.assertThrows(RuntimeException.class, () -> validator.contains(Collections.emptyList(), targetName, "1"));
         Assertions.assertThrows(RuntimeException.class, () -> validator.contains(Collections.singleton("2"), targetName, "1"));
         Assertions.assertEquals(validator, validator.contains(Arrays.asList("2", "1"), targetName, "1"));
 
@@ -60,12 +61,14 @@ class ValidatorTest {
         Assertions.assertThrows(RuntimeException.class, () -> validator.contains(new Object[0], targetName, "1"));
         Assertions.assertThrows(RuntimeException.class, () -> validator.contains(new Object[]{"2"}, targetName, "1"));
         Assertions.assertEquals(validator, validator.contains(new Object[]{"2", "1"}, targetName, "1"));
+        Assertions.assertEquals(validator, validator.contains(new Object[]{"2", "1", null}, targetName, null));
 
         Assertions.assertEquals(validator, validator.containsKey((Map<Object, ?>) null, targetName, new Object(), false));
         Assertions.assertThrows(RuntimeException.class, () -> validator.containsKey((Map<Object, ?>) null, targetName, new Object()));
-        Assertions.assertThrows(RuntimeException.class, () -> validator.containsKey(Collections.EMPTY_MAP, targetName, "1"));
+        Assertions.assertThrows(RuntimeException.class, () -> validator.containsKey(Collections.emptyMap(), targetName, "1"));
         Assertions.assertThrows(RuntimeException.class, () -> validator.containsKey(Collections.singletonMap("2", true), targetName, "1"));
         Assertions.assertEquals(validator, validator.containsKey(Collections.singletonMap("1", true), targetName, "1"));
+        Assertions.assertEquals(validator, validator.containsKey(Collections.singletonMap(null, true), targetName, null));
     }
 
     @Test
@@ -78,7 +81,7 @@ class ValidatorTest {
 
         Assertions.assertEquals(validator, validator.notContains((Collection<Object>) null, targetName, new Object(), false));
         Assertions.assertThrows(RuntimeException.class, () -> validator.notContains((Collection<Object>) null, targetName, new Object()));
-        Assertions.assertThrows(RuntimeException.class, () -> validator.notContains(Collections.EMPTY_LIST, targetName, "1"));
+        Assertions.assertThrows(RuntimeException.class, () -> validator.notContains(Collections.emptyList(), targetName, "1"));
         Assertions.assertThrows(RuntimeException.class, () -> validator.notContains(Arrays.asList("2", "1"), targetName, "1"));
         Assertions.assertEquals(validator, validator.notContains(Collections.singleton("2"), targetName, "1"));
 
@@ -90,7 +93,7 @@ class ValidatorTest {
 
         Assertions.assertEquals(validator, validator.notContainsKey((Map<Object, ?>) null, targetName, new Object(), false));
         Assertions.assertThrows(RuntimeException.class, () -> validator.notContainsKey((Map<Object, ?>) null, targetName, new Object()));
-        Assertions.assertThrows(RuntimeException.class, () -> validator.notContainsKey(Collections.EMPTY_MAP, targetName, "1"));
+        Assertions.assertThrows(RuntimeException.class, () -> validator.notContainsKey(Collections.emptyMap(), targetName, "1"));
         Assertions.assertThrows(RuntimeException.class, () -> validator.notContainsKey(Collections.singletonMap("1", true), targetName, "1"));
         Assertions.assertEquals(validator, validator.notContainsKey(Collections.singletonMap("2", true), targetName, "1"));
     }
@@ -222,7 +225,7 @@ class ValidatorTest {
 
         Assertions.assertEquals(validator, validator.size((Collection<Object>) null, targetName, 0, false));
         Assertions.assertThrows(RuntimeException.class, () -> validator.size((Collection<Object>) null, targetName, 0));
-        Assertions.assertThrows(RuntimeException.class, () -> validator.size(Collections.EMPTY_LIST, targetName, 0));
+        Assertions.assertThrows(RuntimeException.class, () -> validator.size(Collections.emptyList(), targetName, 0));
         Assertions.assertThrows(RuntimeException.class, () -> validator.size(Collections.singleton(new Object()), targetName, 2));
         Assertions.assertEquals(validator, validator.size(Arrays.asList(1, 2), targetName, 2));
 
